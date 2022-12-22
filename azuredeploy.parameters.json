@@ -41,6 +41,9 @@
     "skuCapacity": {
       "value": 1
     },
+    "MySqlSku": {
+      "Value": "null"
+    },  
     "databaseSkuSizeMB": {
       "value": 5120
     },
@@ -63,10 +66,10 @@
       "value": "redcap"
     },
     "repoURL": {
-      "value": "https://github.com/vanderbilt-redcap/redcap-azure.git"
+      "value": "https://github.com/RajaGottumukula/azure-redcap-paas"
     },
     "branch": {
-      "value": "master"
+      "value": "redcaptest"
     }
   }
 }
