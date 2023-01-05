@@ -23,25 +23,30 @@
         "description": "Database administrator password"
       }
     },
-    "redcapCommunityUsername": {
+    // "redcapCommunityUsername": {
+    //   "type": "string",
+    //   "metadata": {
+    //     "description": "REDCap Community site username for downloading the REDCap zip file."
+    //   }
+    // },
+    // "redcapCommunityPassword": {
+    //   "type": "securestring",
+    //   "metadata": {
+    //     "description": "REDCap Community site password for downloading the REDCap zip file."
+    //   }
+    // },
+    // "redcapAppZipVersion": {
+    //   "type": "string",
+    //   "metadata": {
+    //     "description": "REDCap zip file version to be downloaded from the REDCap Community site."
+    //   },
+    //   "defaultValue": "latest"
+    // },
+    "redcapAppZip": {
       "type": "string",
       "metadata": {
-        "description": "REDCap Community site username for downloading the REDCap zip file."
-      }
-    },
-    "redcapCommunityPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "REDCap Community site password for downloading the REDCap zip file."
-      }
-    },
-    "redcapAppZipVersion": {
-      "type": "string",
-      "metadata": {
-        "description": "REDCap zip file version to be downloaded from the REDCap Community site."
+        "description": "A publicly accessible path to your copy of the REDCap Source zipped files. Can be downloaded from https://community.projectredcap.org/index.html"
       },
-      "defaultValue": "latest"
-    },
     "fromEmailAddress": {
       "type": "string",
       "metadata": {

@@ -11,9 +11,9 @@ $webRoot = "$($env:HOME)\site\wwwroot"
 
 $dbver=""
 $zipUri = "$env:APPSETTING_redcapAppZip"
-$zipUsername = "$env:APPSETTING_redcapCommunityUsername"
-$zipPassword = "$env:APPSETTING_redcapCommunityPassword"
-$zipVersion = "$env:APPSETTING_redcapAppZipVersion"
+# $zipUsername = "$env:APPSETTING_redcapCommunityUsername"
+# $zipPassword = "$env:APPSETTING_redcapCommunityPassword"
+# $zipVersion = "$env:APPSETTING_redcapAppZipVersion"
 $stamp=(Get-Date).toString("yyyy-MM-dd-HH-mm-ss")
 $logFile = "$path\log-$stamp.txt"
 Set-Content "$($env:HOME)\site\repository\currlogname.txt" -Value $logFile -NoNewline
@@ -27,8 +27,10 @@ function Main {
 
 		$filename = GetFileName
 		$filePath = "$path\$filename"
-        $version = $filename.Replace(".zip","")
-		$dbver = $version.Replace("redcap","")
+        # $version = $filename.Replace(".zip","")
+		# $dbver = $version.Replace("redcap","")
+		$version = "$env:APPSETTING_redcapAppVersion"
+		$dbver = $version
 
         Log("Processing $version")
 
@@ -36,7 +38,8 @@ function Main {
             Log("Downloading $filename")
     
             # Download the ZIP file
-            DownloadFile($filePath)
+            #DownloadFile($filePath)
+			Invoke-WebRequest $zipUri -OutFile $filePath
 
             Log("Unzipping file")
             mkdir "$path\target" -ErrorAction SilentlyContinue
