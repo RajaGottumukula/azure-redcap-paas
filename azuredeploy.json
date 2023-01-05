@@ -46,7 +46,8 @@
       "type": "string",
       "metadata": {
         "description": "A publicly accessible path to your copy of the REDCap Source zipped files. Can be downloaded from https://community.projectredcap.org/index.html"
-      },
+      }
+    },  
     "fromEmailAddress": {
       "type": "string",
       "metadata": {
