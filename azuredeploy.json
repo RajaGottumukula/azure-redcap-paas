@@ -362,7 +362,7 @@
           "name": "web",
           "type": "sourcecontrols",
           "location": "[resourceGroup().location]",
-          "apiVersion": "2021-05-01",
+          "apiVersion": "2022-03-01",
           "dependsOn": [
             "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]",
             "[concat('Microsoft.DBforMySQL/flexibleServers/', variables('serverName'))]"
