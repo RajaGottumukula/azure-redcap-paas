@@ -211,7 +211,11 @@
       "metadata": {
         "description": "The main branch of the application repo"
       }
-    }
+    },
+    "redcapAppVersion": {
+      "type": "string",
+      "defaultValue": "13.1.0"
+    } 
   },
   "variables": {
     "siteName": "[replace(parameters('siteName'), ' ', '')]",
@@ -300,7 +304,11 @@
             },
             {
               "Name": "redcapAppZip",
-              "value": ""
+              "value": "[parameters('redcapAppZip')]"
+            },
+            {
+              "Name": "redcapAppVersion",
+              "value": "[parameters('redcapAppVersion')"
             },
             // {
             //   "Name": "redcapCommunityUsername",
