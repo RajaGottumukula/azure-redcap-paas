@@ -11,18 +11,17 @@
     "administratorLoginPassword": {
       "value": null
     },
-    // "redcapCommunityUsername": {
-    //   "value": null
-    // },
-    // "redcapCommunityPassword": {
-    //   "value": null
-    // },
-    // "redcapAppZipVersion": {
-    //   "value": "latest"
-    // },
-    {
-      "Name": "redcapAppVersion",
-      "value": "[parameters('redcapAppVersion')"
+    "redcapCommunityUsername": {
+      "value": null
+    },
+    "redcapCommunityPassword": {
+      "value": null
+    },
+    "redcapAppZipVersion": {
+      "value": "latest"
+    },
+    "redcapAppZip": {
+      "value": ""
     },
     "fromEmailAddress": {
       "value": null
@@ -45,9 +44,6 @@
     "skuCapacity": {
       "value": 1
     },
-    "MySqlSku": {
-      "Value": "null"
-    },  
     "databaseSkuSizeMB": {
       "value": 5120
     },
@@ -70,10 +66,10 @@
       "value": "redcap"
     },
     "repoURL": {
-      "value": "https://github.com/RajaGottumukula/azure-redcap-paas"
+      "value": "https://github.com/microsoft/azure-redcap-paas.git"
     },
     "branch": {
-      "value": "redcaptest"
+      "value": "main"
     }
   }
 }
