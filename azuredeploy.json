@@ -439,7 +439,7 @@
     },
     {
       "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
-      "apiVersion": "2017-12-01-preview",
+      "apiVersion": "2021-05-01",
       "name": "[format('{0}/{1}', variables('serverName_var'), 'AllowAzureIPs')]",
       "location": "[resourceGroup().location]",
       "properties": {
@@ -453,7 +453,7 @@
     },
     {
       "type": "Microsoft.DBforMySQL/flexibleServers/databases",
-      "apiVersion": "2017-12-01",
+      "apiVersion": "2021-05-01",
       "name": "[format('{0}/{1}', variables('serverName_var'), format('{0}', variables('databaseName')))]",
       "tags": {
         "displayName": "DB"
