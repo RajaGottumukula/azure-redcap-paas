@@ -125,6 +125,19 @@
         "description": "Describes plan's instance count (how many distinct web servers will be deployed in the farm) - this can be changed after deployment"
       }
     },
+    "MySqlSku": {
+      "defaultValue": "Standard_D2ds_v4",
+      "allowedValues": [
+        "Standard_D2ds_v4",
+        "Standard_D4ds_v4",
+        "Standard_D8ds_v4",
+        "Standard_D16ds_v4"
+      ],
+      "type": "String",
+      "metadata": {
+        "description": "Describes plan's pricing tier and capacity - this can be changed after deployment. Check details at https://azure.microsoft.com/en-us/pricing/details/mysql/flexible-server/"
+      }
+    },  
     "databaseSkuSizeMB": {
       "type": "int",
       "defaultValue": 5120,
@@ -228,7 +241,7 @@
       "GeneralPurpose": "GP",
       "MemoryOptimized": "MO"
     },
-    "databaseForMySqlSku": "[format('{0}_{1}_{2}', variables('tierSymbol')[parameters('databaseForMySqlTier')], parameters('databaseForMySqlFamily'), parameters('databaseForMySqlCores'))]",
+    // "databaseForMySqlSku": "[format('{0}_{1}_{2}', variables('tierSymbol')[parameters('databaseForMySqlTier')], parameters('databaseForMySqlFamily'), parameters('databaseForMySqlCores'))]",
     "storageName_var": "[format('storage{0}', uniqueString(resourceGroup().id))]",
     "storageAccountId": "[format('{0}/providers/Microsoft.Storage/storageAccounts/{1}', resourceGroup().id, variables('storageName_var'))]"
   },
@@ -282,7 +295,7 @@
     },
     {
       "type": "Microsoft.Web/sites",
-      "apiVersion": "2016-08-01",
+      "apiVersion": "2022-03-01",
       "name": "[variables('webSiteName_var')]",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -397,13 +410,13 @@
         "isManualIntegration": true
       },
       "dependsOn": [
-        "[resourceId('Microsoft.DBforMySQL/servers', variables('serverName_var'))]",
+        "[resourceId('Microsoft.DBforMySQL/flexibleServers', variables('serverName_var'))]",
         "[resourceId('Microsoft.Web/sites', variables('webSiteName_var'))]"
       ]
     },
     {
-      "type": "Microsoft.DBforMySQL/servers",
-      "apiVersion": "2017-12-01-preview",
+      "type": "Microsoft.DBforMySQL/flexibleServers",
+      "apiVersion": "2021-05-01",
       "name": "[variables('serverName_var')]",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -416,16 +429,16 @@
         "storageProfile": {
           "storageMB": "[parameters('databaseSkuSizeMB')]",
           "backupRetentionDays": "7",
-          "geoRedundantBackup": "Disabled"
+          "geoRedundantBackup": "Enabled"
         },
         "sslEnforcement": "Disabled"
       },
       "sku": {
-        "name": "[variables('databaseForMySqlSku')]"
+        "name": "[parameters('MySqlSku')]"
       }
     },
     {
-      "type": "Microsoft.DBforMySQL/servers/firewallRules",
+      "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
       "apiVersion": "2017-12-01-preview",
       "name": "[format('{0}/{1}', variables('serverName_var'), 'AllowAzureIPs')]",
       "location": "[resourceGroup().location]",
@@ -434,12 +447,12 @@
         "endIpAddress": "0.0.0.0"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.DBforMySQL/servers', variables('serverName_var'))]",
-        "[resourceId('Microsoft.DBforMySQL/servers/databases', variables('serverName_var'), format('{0}', variables('databaseName')))]"
+        "[resourceId('Microsoft.DBforMySQL/flexibleServers', variables('serverName_var'))]",
+        "[resourceId('Microsoft.DBforMySQL/flexibleServers/databases', variables('serverName_var'), format('{0}', variables('databaseName')))]"
       ]
     },
     {
-      "type": "Microsoft.DBforMySQL/servers/databases",
+      "type": "Microsoft.DBforMySQL/flexibleServers/databases",
       "apiVersion": "2017-12-01",
       "name": "[format('{0}/{1}', variables('serverName_var'), format('{0}', variables('databaseName')))]",
       "tags": {
@@ -450,7 +463,7 @@
         "collation": "utf8_general_ci"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.DBforMySQL/servers', variables('serverName_var'))]"
+        "[resourceId('Microsoft.DBforMySQL/flexibleServers', variables('serverName_var'))]"
       ]
     }
   ],
