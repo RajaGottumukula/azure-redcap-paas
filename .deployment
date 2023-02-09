@@ -1,3 +1,0 @@
-﻿[config]
-command = bash deploy.sh
-SCM_COMMAND_IDLE_TIMEOUT=600
